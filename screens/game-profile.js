@@ -61,10 +61,10 @@ class GameProfileScreen extends React.Component {
       const hand3 = getHandCards(deck)
       const hand4 = getHandCards(deck)
       const players = [
-        {player1, team1, hand1},
-        {player2, team1, hand2},
-        {player3, team2, hand3},
-        {player4, team2, hand4}
+        {name: player1, team: team1, hand: hand1, player: 1},
+        {name: player2, team: team1, hand: hand2, player: 2},
+        {name: player3, team: team2, hand: hand3, player: 3},
+        {name: player4, team: team2, hand: hand4, player: 4}
       ]
 
       return players

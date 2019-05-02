@@ -17,15 +17,32 @@ class GameScreen extends Component {
         }
     }
 
+    playerCards() {
+        const { players } = this.props
+
+        return players.map(({ name, player, team, hand }) => {
+
+            const h = hand.join()
+
+            return ( <View>
+                        <Text>{player}. {name}</Text>
+                        <Text>TEAM: {team}</Text>
+                        <Text>CARDS: {h}</Text>
+                    </View>)
+        })
+        // console.log(stuff)
+        // return stuff
+    }
+
     render() {
         // access store players array
         console.log("IN GAME:")
-        console.log(this.props.players)
+        // console.log(this.props.players)
 
         return (
             <View>
                 {/* display player name/team and the card they played */}
-
+                {this.playerCards()}
                 {/* who's turn is it in the middle, with a button to play turn */}
                 {/* button should lead to 'player-hand' screen */}
             </View>
@@ -37,7 +54,7 @@ const mapStateToProps = (state) => {
     console.log("Mapping props: ")
     console.log(state)
     return {
-      players: state // array {player, team}
+      players: state.profile // array {player, team}
     }
 }
 
