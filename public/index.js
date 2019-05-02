@@ -31,6 +31,5 @@ export const getHandCards = (deck) => {
         const card = deck.splice(card_index, 1)[0]
         hand.push(card)
     }
-    console.log(hand)
     return hand
 }

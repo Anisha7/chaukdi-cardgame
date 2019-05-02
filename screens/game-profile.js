@@ -3,6 +3,7 @@ import { StyleSheet, Text, View, TouchableHighlight, TextInput } from 'react-nat
 
 import { connect } from 'react-redux'
 import { addPlayers } from '../actions'
+import {generateDeck, getHandCards} from '../public/'
 
 class TeamInput extends Component {
   constructor(props) {
@@ -10,11 +11,11 @@ class TeamInput extends Component {
   }
 
   render() {
-    const { setTeamName, i } = this.props 
+    const { setTeamName } = this.props 
     return (
       <TextInput
         style={styles.input}
-        onChangeText={(name) => setTeamName(name, i)}
+        onChangeText={(name) => setTeamName(name)}
         placeholder="Enter Team Name"
       />
     );
@@ -27,11 +28,11 @@ class PlayerInput extends Component {
   }
 
   render() {
-    const { setPlayerName, i, team } = this.props
+    const { setPlayerName } = this.props
     return (
       <TextInput
         style={styles.input}
-        onChangeText={(name) => setPlayerName(name, team, i) }
+        onChangeText={(name) => setPlayerName(name) }
         placeholder="Enter player name"
       />
     );
@@ -43,17 +44,30 @@ class GameProfileScreen extends React.Component {
     constructor(props) {
       super(props)
       this.state = {
-        teams: [''],
-        players: ['','','','']
+        team1 : '',
+        player1: '',
+        player2: '',
+        team2: '',
+        player3: '',
+        player4: '',
       }
     }
     
-    setTeamName(name, i) {
-      this.state.teams[i] = name
-    }
+    makePlayersArray() {
+      const { team1, player1, player2, team2, player3, player4 } = this.state
+      let deck = generateDeck()
+      const hand1 = getHandCards(deck)
+      const hand2 = getHandCards(deck)
+      const hand3 = getHandCards(deck)
+      const hand4 = getHandCards(deck)
+      const players = [
+        {player1, team1, hand1},
+        {player2, team1, hand2},
+        {player3, team2, hand3},
+        {player4, team2, hand4}
+      ]
 
-    setPlayerName(name, team, i) {
-      this.state.players[i] = {name, team}
+      return players
     }
 
     render() {
@@ -63,22 +77,23 @@ class GameProfileScreen extends React.Component {
                 <Text>Profile</Text>
                 {/* team 1 */}
                 <Text>Team 1</Text>
-                <TeamInput setTeamName={(name, i) => this.setTeamName(name, i)} i={0}/>
-                <PlayerInput setPlayerName={(name, team, i) => this.setPlayerName(name, team, i)} team={this.state.team[0]} i={0}/>
-                <PlayerInput setPlayerName={(name, team, i) => this.setPlayerName(name, team, i)} team={this.state.team[0]} i={1}/>
+                <TeamInput setTeamName={(name) => this.setState({team1: name})}/>
+                <PlayerInput setPlayerName={(name) => this.setState({player1: name})}/>
+                <PlayerInput setPlayerName={(name) => this.setState({player2: name})}/>
 
                 {/*  team 2  */}
                 <Text>Team 2</Text>
-                <TeamInput setTeamName={(name, i) => this.setTeamName(name, i)} i={1}/>
-                <PlayerInput setPlayerName={(name, team, i) => this.setPlayerName(name, team, i)} team={this.state.team[1]} i={2}/>
-                <PlayerInput setPlayerName={(name, team, i) => this.setPlayerName(name, team, i)} team={this.state.team[1]} i={3}/>
+                <TeamInput setTeamName={(name) => this.setState({team2: name})}/>
+                <PlayerInput setPlayerName={(name) => this.setState({player3: name})}/>
+                <PlayerInput setPlayerName={(name) => this.setState({player4: name})}/>
 
                 {/* button to navigate, pass in form values as props */}
                 <TouchableHighlight
                     style={styles.button}
                     onPress={() => {
                       // update store values, call action
-                      addPlayers(this.state.players)
+                      const players = this.makePlayersArray()
+                      this.props.addPlayers(players)
                       navigate('Game', this.state)}
                     }
                 >

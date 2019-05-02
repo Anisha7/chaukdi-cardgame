@@ -2,34 +2,26 @@
 
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
+import { connect } from 'react-redux'
+
 import {generateDeck, getHandCards} from '../public/'
 
 class GameScreen extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            player1: {hand: [], curr: ''},
-            player2: {hand: [], curr: ''},
-            player3: {hand: [], curr: ''},
-            player4: {hand: [], curr: ''}
+            turn: '',
+            currentPlay: [],
+            team1Score: 0,
+            team2Score: 0,
         }
-        this.init()
-    }
-
-    init() {
-        let deck = generateDeck()
-        let hand = getHandCards(deck)
-        this.setState({player1: hand})
-        hand = getHandCards(deck)
-        this.setState({player3: hand})
-        hand = getHandCards(deck)
-        this.setState({player2: hand})
-        hand = getHandCards(deck)
-        this.setState({player4: hand})
-        console.log(deck) // should be empty
     }
 
     render() {
+        // access store players array
+        console.log("IN GAME:")
+        console.log(this.props.players)
+
         return (
             <View>
                 {/* display player name/team and the card they played */}
@@ -41,4 +33,18 @@ class GameScreen extends Component {
     }
 }
 
-export default GameScreen
+const mapStateToProps = (state) => {
+    console.log("Mapping props: ")
+    console.log(state)
+    return {
+      players: state // array {player, team}
+    }
+}
+
+const mapDispatchToProps = () => {
+    return {
+      
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps())(GameScreen)

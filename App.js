@@ -12,16 +12,8 @@ import { Provider } from 'react-redux'
 import reducers from './reducers'
 const store = createStore(reducers)
 
-// const MainNavigator = createStackNavigator({
-//   Home: { screen: HomeScreen },
-//   Profile: { screen: GameProfileScreen },
-//   Rules: { screen: RulesScreen},
-//   Game: { screen: GameScreen}
-// })
-
 const App = () => (
   <Provider store={store}>
-    {/* {createAppContainer(MainNavigator)} */}
     <Main />
   </Provider>
 )
