@@ -36,6 +36,7 @@ class GameScreen extends Component {
         // return stuff
     }
 
+    // FIGURE OUT WHO WON WHEN ALL PLAYERS HAVE PLAYED + RESET CURRENT PLAY
     setCard(players) {
         // which card was selected: change turn
         const selectedCard = this.props.navigation.getParam('selectedCard', null)
@@ -43,6 +44,9 @@ class GameScreen extends Component {
         // ADD TO IF: SELECTED CARD IS NOT ALREADY IN CURRENT PLAY
         if (selectedCard !== null && this.state.currentPlay.includes(selectedCard) !== true) {
             this.state.currentPlay.push(selectedCard) // works
+            // TODO: remove selectedCard from player's hand
+            
+            
             // update turn index
             console.log("HERE")
             if (this.state.turnIndex == 4) {

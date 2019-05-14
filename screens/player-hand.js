@@ -11,6 +11,16 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux'
 
+import { images } from '../public/images'
+let test_img = require('../assets/cards/2C.png')
+
+// let stored = {}
+// for (i in deck) {
+//     let path = '../assets/cards/'+ item + '.png'
+//     let img = require(path)
+//     stored[deck[i]] = img
+// }
+
 class PlayerHand extends Component {
     constructor(props) {
         super(props)
@@ -45,13 +55,12 @@ class PlayerHand extends Component {
     }
 
     cardObjectList(hand) {
-
         let cards = hand.map((item) => {
             let path = '../assets/cards/'.concat(item).concat('.png')
             console.log(path)
             return (
                 <Image key={item} 
-                       source={{uri: path}} 
+                       source={images[item]} 
                        style={{
                         alignSelf: 'center',
                         height: 100,
@@ -88,6 +97,9 @@ class PlayerHand extends Component {
                     
                     {this.cardObjectList(hand)}
                     {/* <Image source={require('../assets/cards/2C.png')} style={{width: 200, height: 200}}/> */}
+                    {/* <Image source={test_img} style={{width: 200, height: 200}}/>
+                    <Image source={test_img} style={{width: 200, height: 200}}/>
+                    <Image source={test_img} style={{width: 200, height: 200}}/> */}
 
                 </ScrollView>
                 {/* form for picking a card */}
