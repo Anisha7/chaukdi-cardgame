@@ -44,12 +44,12 @@ class GameProfileScreen extends React.Component {
     constructor(props) {
       super(props)
       this.state = {
-        team1 : '',
-        player1: '',
-        player2: '',
-        team2: '',
-        player3: '',
-        player4: '',
+        team1 : 'Team1',
+        player1: 'Player1',
+        player2: 'Player2',
+        team2: 'Team2',
+        player3: 'Player3',
+        player4: 'Player4',
       }
     }
     

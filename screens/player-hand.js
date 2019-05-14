@@ -1,11 +1,23 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, TouchableHighlight, ScrollView, Image } from 'react-native';
+import { 
+    StyleSheet, 
+    Text, 
+    View, 
+    Picker, 
+    ScrollView, 
+    Image, 
+    ImageBackground, 
+    TouchableHighlight 
+} from 'react-native';
 import { connect } from 'react-redux'
 
 class PlayerHand extends Component {
     constructor(props) {
         super(props)
         // pass in player name as props or in constructor?
+        this.state = {
+            selectedCard: null,
+        }
     }
 
     getData() {
@@ -20,9 +32,16 @@ class PlayerHand extends Component {
         return data[0]
     }
 
-    createCardForm() {
+    createCardForm(hand) {
         // create a form that allows player to pick a card
-        return
+        return hand.map((item) => {
+            return (
+                // MITCHELL HELP PLEASE
+                // <ImageBackground key={item} source={{uri:'../assets/cards/'.concat(item).concat('.png')}} style={{width: 100, height: 50}}>
+                <Picker.Item key={item} label={item} value={item} />
+                // </ImageBackground>
+            )
+        })
     }
 
     cardObjectList(hand) {
@@ -31,7 +50,16 @@ class PlayerHand extends Component {
             let path = '../assets/cards/'.concat(item).concat('.png')
             console.log(path)
             return (
-                <Image key={item} source={{src: path}} style={{width: 200, height: 200, borderWidth: 2, borderColor: 'black'}}/>
+                <Image key={item} 
+                       source={{uri: path}} 
+                       style={{
+                        alignSelf: 'center',
+                        height: 100,
+                        width: 100,
+                        borderWidth: 1
+                    }}
+                      resizeMode="stretch"
+                />
             )
         })
         return cards
@@ -52,15 +80,34 @@ class PlayerHand extends Component {
                 <Text>TEAM: {team}</Text>
                 <Text>{hand.join()}</Text>
                 <ScrollView
-                    style={{height: 500}}
+                    style={{height: 100}}
                     horizontal={true} // add for horizontal scroll
                 >
                     {/* add the 13 cards in hand here */}
                     
                     {this.cardObjectList(hand)}
                     {/* <Image source={require('../assets/cards/2C.png')} style={{width: 200, height: 200}}/> */}
-                
+
                 </ScrollView>
+                {/* form for picking a card */}
+                <Picker
+                    selectedValue={this.state.selectedCard}
+                    style={styles.picker}
+                    onValueChange={(itemValue, itemIndex) =>
+                        this.setState({selectedCard: itemValue})
+                    }>
+                    {this.createCardForm(hand)}
+                </Picker>
+
+                {/* button to play card */}
+                <TouchableHighlight
+                    style={styles.button}
+                    onPress={() => {
+                      // send played card to game screen
+                    }}
+                >
+                    <Text style={styles.buttonText}> Play Card </Text>
+                </TouchableHighlight>
             </View>
         )
     }
@@ -73,6 +120,21 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
     },
+    picker: {
+        alignSelf: 'center',
+        height: 50, 
+        width: 100,
+    },
+    button: {
+        padding: 20,
+        borderColor: 'black',
+        borderStyle: 'solid',
+        borderWidth: 2,
+    },
+        buttonText: {
+        fontSize: 24
+    },
+    
 });
 
 const mapStateToProps = (state) => {
