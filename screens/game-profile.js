@@ -56,10 +56,10 @@ class GameProfileScreen extends React.Component {
     makePlayersArray() {
       const { team1, player1, player2, team2, player3, player4 } = this.state
       let deck = generateDeck()
-      const hand1 = getHandCards(deck)
-      const hand2 = getHandCards(deck)
-      const hand3 = getHandCards(deck)
-      const hand4 = getHandCards(deck)
+      const hand1 = getHandCards(deck).sort()
+      const hand2 = getHandCards(deck).sort()
+      const hand3 = getHandCards(deck).sort()
+      const hand4 = getHandCards(deck).sort()
       const players = [
         {name: player1, team: team1, hand: hand1, player: 1},
         {name: player2, team: team1, hand: hand2, player: 2},

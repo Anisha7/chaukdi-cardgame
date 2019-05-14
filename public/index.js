@@ -42,9 +42,34 @@ export const getHandCards = (deck) => {
 
 // sort the given list of cards
 export const sortCards = (hand) => {
-    return
+    spades = []
+    hearts = []
+    clubs = []
+    diamonds = []
+    for (i in hand) {
+        card = hand[i]
+        if (card.contains('C') == true) {
+            clubs.push(card)
+        } else if (card.contains('S') == true) {
+            spades.push(card)
+        } else if (card.contains('D') == true) {
+            diamonds.push(card)
+        } else if (card.contains('H') == true) {
+            hearts.push(card)
+        }
+    }
+
+    spades.sort()
+    hearts.sort()
+    clubs.sort()
+    diamonds.sort()
+    return hearts.concat(diamonds).concat(spades).concat(diamonds)
 }
 
+
+export const isValidPlay = (type, card) => {
+    return
+}
 // say which card is bigger
 export const isBigger = (card1, card2) => {
     return

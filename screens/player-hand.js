@@ -30,9 +30,7 @@ class PlayerHand extends Component {
 
     cardObjectList(hand) {
         let cards = hand.map((item) => {
-            let path = '../assets/cards/'.concat(item).concat('.png')
-            console.log(path)
-            borderColor = 'black'
+            borderColor = 'white'
             if (item == this.state.selectedCard) {
                 borderColor = 'yellow'
             }
@@ -67,12 +65,8 @@ class PlayerHand extends Component {
 
     render(){
         const { navigate } = this.props.navigation
-        console.log("PLAYER HAND PAGE")
         const data = this.getData()
-        console.log(data)
         const { name, player, team, hand } = data
-        console.log(name, player, team, hand)
-        // this.props.navigation.state.params // {hand:'turn...'}
         // render page for particular player
         // allow player to choose a card
         return (
