@@ -22,7 +22,6 @@ class HomeScreen extends React.Component {
                       }}
                       // resizeMode="stretch"
                     />
-                <Text style={styles.title}>CHAUKDI</Text>
                 <Text style={styles.subtitle}>A 4-player pass n' play card game</Text>
 
                 {/* play button */}
@@ -58,16 +57,22 @@ const styles = StyleSheet.create({
     },
     subtitle: {
       padding: 10,
-      fontSize: 10
+      fontSize: 20,
+      alignSelf: 'center',
+      marginBottom: 20
     },
     button: {
       padding: 20,
       borderColor: 'black',
       borderStyle: 'solid',
       borderWidth: 2,
+      width: '50%',
+      alignSelf: 'center',
+      margin: 20
     },
     buttonText: {
-        fontSize: 24
+        fontSize: 24,
+        alignSelf: 'center'
     }
   });
 
