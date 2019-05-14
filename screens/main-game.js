@@ -24,7 +24,7 @@ class GameScreen extends Component {
 
             const h = hand.join()
 
-            return ( <View>
+            return ( <View key={name}>
                         <Text>{player}. {name}</Text>
                         <Text>TEAM: {team}</Text>
                         <Text>CARDS: {h}</Text>
