@@ -11,7 +11,7 @@ const MainNavigator = createStackNavigator({
     Profile: { screen: GameProfileScreen },
     Rules: { screen: RulesScreen},
     Game: { screen: GameScreen},
-    PlaterHand: { screen: PlayerHand},
+    PlayerHand: { screen: PlayerHand},
   })
 
 export default createAppContainer(MainNavigator)

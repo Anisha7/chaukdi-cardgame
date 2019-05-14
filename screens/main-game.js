@@ -22,12 +22,12 @@ class GameScreen extends Component {
 
         return players.map(({ name, player, team, hand }) => {
 
-            const h = hand.join()
+            // const h = hand.join()
 
             return ( <View key={name}>
                         <Text>{player}. {name}</Text>
                         <Text>TEAM: {team}</Text>
-                        <Text>CARDS: {h}</Text>
+                        {/* <Text>CARDS: {h}</Text> */}
                     </View>)
         })
         // console.log(stuff)
@@ -55,7 +55,6 @@ class GameScreen extends Component {
                     // onpress isnt right??
                     // <3
                     onPress={() => navigate('PlayerHand', { turn: this.state.turn })}
-
                 />
             </View>
         )

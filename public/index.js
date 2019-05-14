@@ -1,15 +1,21 @@
 // helper functions for game functionality
-
 // card deck
 export const generateDeck = () => {
     // hearts, diamonds, spades, clubs
-    const SUITS = 'cdhs'
+    const SUITS = 'CDHS'
     const RANKS = '23456789TJQKA'
     const DECK = []
     // const DECK = tuple(''.join(card) for card in itertools.product(RANKS, SUITS))
     for (s in SUITS) {
         for (r in RANKS) {
-            DECK.push(`${SUITS[s]}${RANKS[r]}`)
+            let suit = SUITS[s]
+            let rank = RANKS[r]
+            if (rank == 'T') {
+                rank = '10'
+            }
+            let name = `${rank}${suit}`
+            DECK.push(name)
+            
         }
     }
     return DECK
