@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Text, View, TouchableHighlight } from 'react-native';
+import { StyleSheet, Text, View, TouchableHighlight, Image } from 'react-native';
 
+const logo = require('../assets/logo.png')
 
 // title page with play button and how to play button
 class HomeScreen extends React.Component {
@@ -12,6 +13,15 @@ class HomeScreen extends React.Component {
         const { navigate } = this.props.navigation
         return (
             <View styles={styles.container}>
+                <Image
+                      source={logo} 
+                      style={{
+                          alignSelf: 'center',
+                          height: 250,
+                          width: 400
+                      }}
+                      // resizeMode="stretch"
+                    />
                 <Text style={styles.title}>CHAUKDI</Text>
                 <Text style={styles.subtitle}>A 4-player pass n' play card game</Text>
 

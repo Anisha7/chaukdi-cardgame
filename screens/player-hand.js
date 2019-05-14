@@ -2,56 +2,30 @@ import React, { Component } from 'react';
 import { 
     StyleSheet, 
     Text, 
-    View, 
-    Picker, 
+    View,  
     ScrollView, 
     Image, 
-    ImageBackground, 
     TouchableHighlight 
 } from 'react-native';
 import { connect } from 'react-redux'
-
 import { images } from '../public/images'
-let test_img = require('../assets/cards/2C.png')
-
-// let stored = {}
-// for (i in deck) {
-//     let path = '../assets/cards/'+ item + '.png'
-//     let img = require(path)
-//     stored[deck[i]] = img
-// }
 
 class PlayerHand extends Component {
     constructor(props) {
         super(props)
-        // pass in player name as props or in constructor?
         this.state = {
             selectedCard: null,
         }
     }
 
     getData() {
-        console.log("Getting data")
         const turn = this.props.navigation.getParam('turn', 'turn missing')
         const { players } = this.props
         const data = players.filter(({ name }) => {
            return name == turn
         })
-        console.log("Here: ", data)
         // get player's cards, name, team
         return data[0]
-    }
-
-    createCardForm(hand) {
-        // create a form that allows player to pick a card
-        return hand.map((item) => {
-            return (
-                // MITCHELL HELP PLEASE
-                // <ImageBackground key={item} source={images[item]} style={{width: 100, height: 50}}>
-                <Picker.Item key={item} label={item} value={item} />
-                // </ImageBackground>
-            )
-        })
     }
 
     cardObjectList(hand) {
@@ -66,10 +40,11 @@ class PlayerHand extends Component {
                 <TouchableHighlight
                     style={{
                         alignSelf: 'center',
-                        height: 100,
-                        width: 100,
+                        height: 200,
+                        width: 150,
                         borderWidth: 3,
-                        borderColor: borderColor
+                        borderColor: borderColor,
+                        marginRight: 10,
                     }
                     }
                     onPress={() => this.setState({selectedCard: item})}
@@ -79,8 +54,8 @@ class PlayerHand extends Component {
                             source={images[item]} 
                             style={{
                                 alignSelf: 'center',
-                                height: 100,
-                                width: 100,
+                                height: 200,
+                                width: 150,
                             }}
                             resizeMode="stretch"
                         />
@@ -106,27 +81,14 @@ class PlayerHand extends Component {
                 <Text>TEAM: {team}</Text>
                 <Text>{hand.join()}</Text>
                 <ScrollView
-                    style={{height: 100}}
+                    style={{height: 300}}
                     horizontal={true} // add for horizontal scroll
                 >
-                    {/* add the 13 cards in hand here */}
+                    {/* the 13 cards in hand here */}
                     
                     {this.cardObjectList(hand)}
-                    {/* <Image source={require('../assets/cards/2C.png')} style={{width: 200, height: 200}}/> */}
-                    {/* <Image source={test_img} style={{width: 200, height: 200}}/>
-                    <Image source={test_img} style={{width: 200, height: 200}}/>
-                    <Image source={test_img} style={{width: 200, height: 200}}/> */}
-
+                    
                 </ScrollView>
-                {/* form for picking a card */}
-                <View style={{height: 300, width: 200}}><Picker
-                    selectedValue={this.state.selectedCard}
-                    style={styles.picker}
-                    onValueChange={(itemValue, itemIndex) =>
-                        this.setState({selectedCard: itemValue})
-                    }>
-                    {this.createCardForm(hand)}
-                </Picker></View>
 
                 {/* button to play card */}
                 <TouchableHighlight

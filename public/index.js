@@ -40,11 +40,12 @@ export const getHandCards = (deck) => {
     return hand
 }
 
-// const deck = generateDeck()
-// let images = {}
-// for (i in deck) {
-//     let path = '../assets/cards/'+ deck[i] + '.png'
-//     let img = require('../assets/cards/2C.png')
-//     images[deck[i]] = img
-// }
-// export { images }
+// sort the given list of cards
+export const sortCards = (hand) => {
+    return
+}
+
+// say which card is bigger
+export const isBigger = (card1, card2) => {
+    return
+}
