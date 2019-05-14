@@ -47,7 +47,7 @@ class PlayerHand extends Component {
         return hand.map((item) => {
             return (
                 // MITCHELL HELP PLEASE
-                // <ImageBackground key={item} source={{uri:'../assets/cards/'.concat(item).concat('.png')}} style={{width: 100, height: 50}}>
+                // <ImageBackground key={item} source={images[item]} style={{width: 100, height: 50}}>
                 <Picker.Item key={item} label={item} value={item} />
                 // </ImageBackground>
             )
@@ -58,17 +58,33 @@ class PlayerHand extends Component {
         let cards = hand.map((item) => {
             let path = '../assets/cards/'.concat(item).concat('.png')
             console.log(path)
+            borderColor = 'black'
+            if (item == this.state.selectedCard) {
+                borderColor = 'yellow'
+            }
             return (
-                <Image key={item} 
-                       source={images[item]} 
-                       style={{
+                <TouchableHighlight
+                    style={{
                         alignSelf: 'center',
                         height: 100,
                         width: 100,
-                        borderWidth: 1
-                    }}
-                      resizeMode="stretch"
-                />
+                        borderWidth: 3,
+                        borderColor: borderColor
+                    }
+                    }
+                    onPress={() => this.setState({selectedCard: item})}
+                    key = {item}
+                    >
+                        <Image key={item} 
+                            source={images[item]} 
+                            style={{
+                                alignSelf: 'center',
+                                height: 100,
+                                width: 100,
+                            }}
+                            resizeMode="stretch"
+                        />
+                </TouchableHighlight>
             )
         })
         return cards
