@@ -138,8 +138,6 @@ const styles = StyleSheet.create({
 });
 
 const mapStateToProps = (state) => {
-    console.log("Mapping props: ")
-    console.log(state)
     return {
       players: state.profile // array {player, team}
     }
